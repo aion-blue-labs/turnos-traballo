@@ -1,0 +1,12 @@
+{
+  "name":"Os meus turnos",
+  "short_name":"Turnos",
+  "description":"Calendario persoal de quendas de traballo",
+  "lang":"gl",
+  "start_url":"./",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f2f8f7",
+  "theme_color":"#116b6b",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

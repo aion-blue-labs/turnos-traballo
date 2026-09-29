@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="gl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#116b6b">
+  <meta name="description" content="Calendario persoal de quendas de traballo">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>Os meus turnos</title>
+</head>
+<body>
+  <header class="topbar">
+    <div><p class="eyebrow">O meu calendario</p><h1>Os meus turnos</h1></div>
+    <button id="settingsBtn" class="icon-btn" aria-label="Abrir axustes">⚙️</button>
+  </header>
+
+  <main>
+    <section class="month-card" aria-labelledby="monthTitle">
+      <div class="month-nav">
+        <button id="prevMonth" class="icon-btn" aria-label="Mes anterior">‹</button>
+        <div><h2 id="monthTitle"></h2><button id="todayBtn" class="text-btn">Ir a hoxe</button></div>
+        <button id="nextMonth" class="icon-btn" aria-label="Mes seguinte">›</button>
+      </div>
+
+      <div class="paint-panel">
+        <div class="paint-head"><strong>Quenda rápida</strong><button id="undoBtn" class="text-btn" disabled>Desfacer</button></div>
+        <p>Escolle unha quenda e toca os días. Escolle «Editar día» para engadir notas.</p>
+        <div id="shiftPalette" class="palette" role="toolbar" aria-label="Quendas rápidas"></div>
+      </div>
+
+      <div class="weekdays" aria-hidden="true"><span>L</span><span>M</span><span>M</span><span>X</span><span>V</span><span>S</span><span>D</span></div>
+      <div id="calendar" class="calendar" aria-labelledby="monthTitle"></div>
+    </section>
+
+    <section class="summary-card" aria-labelledby="summaryTitle">
+      <div class="section-head"><div><p class="eyebrow">Resumo mensual</p><h2 id="summaryTitle">As túas quendas</h2></div><strong id="hoursTotal" class="hours">0 h</strong></div>
+      <div id="summary" class="summary-grid"></div>
+    </section>
+
+    <section class="upcoming-card" aria-labelledby="upcomingTitle">
+      <div class="section-head"><div><p class="eyebrow">Próximos días</p><h2 id="upcomingTitle">O que vén agora</h2></div></div>
+      <div id="upcoming" class="upcoming-list"></div>
+    </section>
+
+    <p class="privacy">🔒 Os datos quedan só neste dispositivo. Non anotes nomes, habitacións, diagnósticos nin datos de pacientes.</p>
+  </main>
+
+  <dialog id="dayDialog" class="sheet">
+    <form id="dayForm" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">Editar día</p><h2 id="dayTitle"></h2></div><button type="button" class="icon-btn close-dialog" aria-label="Pechar">×</button></div>
+      <input id="dayKey" type="hidden">
+      <fieldset><legend>Quenda</legend><div id="dayShiftOptions" class="shift-options"></div></fieldset>
+      <label>Servizo ou lugar (opcional)<input id="serviceInput" maxlength="60" placeholder="Ex.: Urxencias"></label>
+      <label>Nota persoal (opcional)<textarea id="noteInput" maxlength="180" rows="3" placeholder="Algo que queiras lembrar, sen datos de pacientes"></textarea></label>
+      <div class="dialog-actions"><button type="button" id="clearDay" class="danger ghost">Borrar día</button><button type="submit" class="primary">Gardar</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog" class="sheet settings-sheet">
+    <div class="dialog-head"><div><p class="eyebrow">Personalizar</p><h2>Axustes e copia</h2></div><button type="button" class="icon-btn close-dialog" aria-label="Pechar">×</button></div>
+    <section><h3>Tipos de quenda</h3><div id="shiftEditor"></div><button id="addShiftBtn" class="secondary">+ Engadir quenda</button></section>
+    <section><h3>Copia de seguridade</h3><p>Descarga os teus turnos ou recupéraos noutro dispositivo.</p><div class="button-row"><button id="exportBtn" class="secondary">Descargar copia</button><label class="secondary file-label">Restaurar copia<input id="importInput" type="file" accept="application/json"></label></div></section>
+    <section><h3>App</h3><div class="button-row"><button id="installBtn" class="secondary" hidden>Instalar app</button><button id="clearAllBtn" class="danger ghost">Borrar todos os datos</button></div></section>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
